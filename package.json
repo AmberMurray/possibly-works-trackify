@@ -15,6 +15,7 @@
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
     "boom": "^4.1.0",
+    "cookie-session": "^2.0.0-beta.1",
     "express": "^4.14.0",
     "humps": "^1.1.0",
     "knex": "^0.12.2",
@@ -22,6 +23,7 @@
     "pg": "^6.1.0"
   },
   "devDependencies": {
+    "dotenv": "^4.0.0",
     "nodemon": "^1.10.2"
   }
 }

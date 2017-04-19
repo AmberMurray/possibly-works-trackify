@@ -8,22 +8,30 @@ const router = express.Router();
 
 router.post('/users', (req, res, next) => {
   bcrypt.hash(req.body.password, 12)
-    .then((hashed_password) => {
-      return knex('users').insert({
-        email: req.body.email,
-        hashed_password: hashed_password
-      }, '*');
-    })
-    .then((users) => {
-      const user = users[0];
+  .then((hashed_password) => {
+    return knex('users').insert({
+      email: req.body.email,
+      hashed_password: hashed_password
+    }, '*');
+  })
+  .then((rows) => {
+    const user = rows[0];
 
-      delete user.hashed_password;
+    delete user.hashed_password;
 
-      res.send(user);
-    })
-    .catch((err) => {
-      next(err);
-    });
+    req.session.userId = user.id;
+
+    res.send(user);
+  })
+  .catch((err) => {
+    next(err);
+  });
+});
+
+router.delete('/session', (req, res, next) => {
+  req.session = null;
+
+  res.sendStatus(200);
 });
 
 module.exports = router;
