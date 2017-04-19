@@ -2,6 +2,7 @@
 
 const express = require('express');
 const app = express();
+const session = require('./routes/session');
 const users = require('./routes/users');
 
 app.disable('x-powered-by');
@@ -16,6 +17,7 @@ app.use(users);
 const tracks = require('./routes/tracks');
 
 app.use(tracks);
+app.use(session);
 
 app.use((_req, res) => {
   res.sendStatus(404);
